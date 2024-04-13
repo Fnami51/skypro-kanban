@@ -1,6 +1,4 @@
 //import { useState } from 'react'
-import '../public/logo.png'
-import '../public/logo-dark.png'
 import './App.css'
 import PopNewCard from './components/PopNewCard.jsx'
 import PopBrowse from './components/PopBrowse.jsx'
