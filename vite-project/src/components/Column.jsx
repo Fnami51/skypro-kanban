@@ -1,13 +1,19 @@
 import '../App.css'
 import Card from './Card.jsx';
 
-function Column({ nameColumn }) {
+function Column({ title, cardInColumn }) {
     return <div className="main__column column">
     <div className="column__title">
-        <p>{nameColumn}</p>
+        <p>{title}</p>
     </div>
     <div className="cards">
-        <Card />
+        {cardInColumn.map((card) => 
+            <Card 
+                key={card.id}
+                topic={card.topic}
+                title={card.title}
+                date={card.date}
+        />)}
     
     </div>
 </div>;
