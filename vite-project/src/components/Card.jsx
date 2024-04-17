@@ -1,4 +1,5 @@
 import '../App.css'
+//import { cardList } from './data.js';
 
 function Card() {
     return <div className="cards__item">
