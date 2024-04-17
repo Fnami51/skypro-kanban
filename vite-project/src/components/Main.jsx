@@ -1,6 +1,6 @@
 import '../App.css'
 import Column from './Column.jsx';
-import { statusList, cardList } from './data.js';
+import { cardList, statusList } from './data.js';
 
 function Main() {
     return <main className="main">

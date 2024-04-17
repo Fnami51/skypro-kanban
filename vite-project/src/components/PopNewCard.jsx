@@ -1,7 +1,9 @@
 import '../App.css'
 import Calendar from './Calendar.jsx';
 
-function PopNewCard() {
+function PopNewCard({onCardAdd}) {
+    
+
     return <div className="pop-new-card" id="popNewCard">
     <div className="pop-new-card__container">
         <div className="pop-new-card__block">
@@ -60,7 +62,7 @@ function PopNewCard() {
                         </div>
                     </div>
                 </div>
-                <button className="form-new__create _hover01" id="btnCreate">Создать задачу</button>
+                <button onClick={onCardAdd} className="form-new__create _hover01" id="btnCreate">Создать задачу</button>
             </div>
         </div>
     </div>
