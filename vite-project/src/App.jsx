@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import PopNewCard from './components/PopNewCard.jsx'
 import PopBrowse from './components/PopBrowse.jsx'
 import Header from './components/Header.jsx'
 import Main from './components/Main.jsx'
+import Loading from './components/Loading.jsx'
 import { cardList } from './components/data.js'
 
 function App() {
@@ -20,6 +21,13 @@ function App() {
             }]
         });
     }
+
+	const [isLoading, setIsLoading] = useState(true); //DEMO
+	function changeLoadingState() {setIsLoading(false)} //DEMO
+
+	useEffect(() => {
+		setTimeout(changeLoadingState, 2000)
+	}, []);
 
   return (
     <div className="wrapper">
@@ -40,13 +48,13 @@ function App() {
 				</div>
 			</div>
 
-			<PopNewCard onCardAdd={onCardAdd}/>
+	<PopNewCard onCardAdd={onCardAdd}/>
 
-			<PopBrowse />
+	<PopBrowse />
 
-      <Header />
+    <Header />
 		
-      <Main cards={cards}/>
+	{isLoading ? <Loading/> : <Main cards={cards} isLoading={isLoading}/>}
     </div>
   )
 }
