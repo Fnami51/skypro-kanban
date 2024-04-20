@@ -8,20 +8,18 @@ import { cardList } from './components/data.js'
 
 function App() {
 	const [cards, setCards] = useState(cardList);
-	console.log(cards)
-	console.log(cardList)
 
 	function onCardAdd() {
-		console.log(cards)
-		setCards((prevCards) => prevCards.push({
-			id: cardList.length + 1,
-			topic: "Web Design",
-			title: "Название задачи",
-			date: "30.10.23",
-			status: "Без статуса",
-		}));
-		console.log(cards)
-	}
+        setCards((prevCards) => {
+            return [...prevCards, {
+                id: cardList.length + 1,
+                topic: "Web Design",
+                title: "Название задачи",
+                date: "30.10.23",
+                status: "Без статуса",
+            }]
+        });
+    }
 
   return (
     <div className="wrapper">
@@ -48,7 +46,7 @@ function App() {
 
       <Header />
 		
-      <Main />
+      <Main cards={cards}/>
     </div>
   )
 }
