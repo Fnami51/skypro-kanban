@@ -1,14 +1,13 @@
 import '../App.css'
-import * as card from './Card.styled.js'
 import { getStyle } from './data.js';
 
 function Card({ topic, title, date }) {
-    return <card.Item>
-    <card.Background>
-        <card.Group>
-            <card.Topic className={getStyle(topic)}> 
-                <card.TopicName className={getStyle(topic)}>{topic}</card.TopicName>
-            </card.Topic>
+    return <div className="cards__item">
+    <div className="cards__card card">
+        <div className="card__group">
+            <div className={"card__theme" + " " +getStyle(topic)}>
+                <p className={getStyle(topic)}>{topic}</p>
+            </div>
             <a href="#popBrowse" target="_self">
                 <card.Button>
                     <div></div>
@@ -32,12 +31,12 @@ function Card({ topic, title, date }) {
                             <rect width="13" height="13" fill="white" />
                         </clipPath>
                     </defs>
-                </card.DateSvg>
-                <card.Date>{date}</card.Date>
-            </card.DateBox>
-        </card.Content>
-    </card.Background>
-</card.Item>;
+                </svg>
+                <p>{date}</p>
+            </div>
+        </div>
+    </div>
+</div>;
   }
  
   export default Card;

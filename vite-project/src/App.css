@@ -25,6 +25,7 @@ ul li {
   list-style: none;
 }
 
+/*Animation*/
 @keyframes card-animation {
   0% {
     height: 0;
@@ -35,6 +36,8 @@ ul li {
     opacity: 1;
   }
 }
+
+/*Classes*/
 html,
 body {
   width: 100%;
@@ -909,6 +912,7 @@ body {
   letter-spacing: 0.2px;
 }
 
+/*Media*/
 @media screen and (max-width: 1200px) {
   .main__block {
     width: 100%;
