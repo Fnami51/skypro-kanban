@@ -1,9 +1,5 @@
 import '../App.css'
-<<<<<<< HEAD
 import * as header from './Header.styled.js'
-=======
-import {Container} from '../App.styled.js'
->>>>>>> 295cddc92825fc6071b267e2fa06498bef3646dd
 import { useState } from 'react';
 import { Container } from '../App.styled.js';
 
@@ -13,15 +9,9 @@ function Header() {
         setIsOpen((prevState) => !prevState);
     };
 
-<<<<<<< HEAD
     return <header.Background>
     <Container>
         <header.Header>
-=======
-    return <header className="header">
-    <Container>
-        <div className="header__block">
->>>>>>> 295cddc92825fc6071b267e2fa06498bef3646dd
             <div className="header__logo _show _light">
                 <a href="" target="_self"><img src="images/logo.png" alt="logo"/></a>
             </div>
@@ -41,17 +31,10 @@ function Header() {
                     </div>
                     <button type="button" className="_hover03"><a href="#popExit">Выйти</a></button>
                 </div>
-<<<<<<< HEAD
             </header.Navigator>					
         </header.Header>
     </Container>			
 </header.Background>;
-=======
-            </nav>					
-        </div>
-    </Container>			
-</header>;
->>>>>>> 295cddc92825fc6071b267e2fa06498bef3646dd
   }
   
   export default Header;
