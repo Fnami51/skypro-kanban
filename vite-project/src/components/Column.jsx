@@ -1,12 +1,13 @@
 import '../App.css'
+import * as column from './Column.styled.js'
 import Card from './Card.jsx';
 
 function Column({ title, cardInColumn }) {
-    return <div className="main__column column">
-    <div className="column__title">
-        <p>{title}</p>
-    </div>
-    <div className="cards">
+    return <column.Column>
+    <column.TitleFrames>
+        <column.Title>{title}</column.Title>
+    </column.TitleFrames>
+    <column.Cards>
         {cardInColumn.map((card) => 
             <Card 
                 key={card.id}
@@ -15,8 +16,8 @@ function Column({ title, cardInColumn }) {
                 date={card.date}
         />)}
     
-    </div>
-</div>;
+    </column.Cards>
+</column.Column>;
   }
  
   export default Column;
