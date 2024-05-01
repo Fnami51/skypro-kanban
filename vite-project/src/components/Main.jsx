@@ -1,10 +1,11 @@
 import '../App.css'
+import {Container} from '../App.styled.js'
 import Column from './Column.jsx';
 import { statusList } from './data.js';
 
 function Main({cards}) {
     return <main className="main">
-    <div className="container">
+    <Container>
         
         <div className="main__block">
         <div className="main__content">
@@ -17,7 +18,7 @@ function Main({cards}) {
         </div>
         
         </div>
-    </div>
+    </Container>
 </main>;
   }
   

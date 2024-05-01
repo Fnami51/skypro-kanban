@@ -1,4 +1,5 @@
 import '../App.css'
+import {Container} from '../App.styled.js'
 import { useState } from 'react';
 
 function Header() {
@@ -8,7 +9,7 @@ function Header() {
     };
 
     return <header className="header">
-    <div className="container">
+    <Container>
         <div className="header__block">
             <div className="header__logo _show _light">
                 <a href="" target="_self"><img src="images/logo.png" alt="logo"/></a>
@@ -31,7 +32,7 @@ function Header() {
                 </div>
             </nav>					
         </div>
-    </div>			
+    </Container>			
 </header>;
   }
   

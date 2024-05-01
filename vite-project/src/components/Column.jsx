@@ -2,7 +2,7 @@ import '../App.css'
 import Card from './Card.jsx';
 
 function Column({ title, cardInColumn }) {
-    return <div className="main__column column">
+    return <div className="column">
     <div className="column__title">
         <p>{title}</p>
     </div>
