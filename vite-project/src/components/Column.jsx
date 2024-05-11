@@ -1,5 +1,5 @@
 import '../App.css'
-import * as column from './Column.styled.js'
+import * as column from '/style_components/Column.styled.js'
 import Card from './Card.jsx';
 
 function Column({ title, cardInColumn }) {

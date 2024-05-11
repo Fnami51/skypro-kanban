@@ -1,6 +1,6 @@
 import '../App.css'
 import { getStyle } from './data.js';
-import * as card from './Card.styled.js'
+import * as card from './style_components/Card.styled.js'
 
 function Card({ topic, title, date }) {
     return <card.Item>
