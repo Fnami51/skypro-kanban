@@ -1,5 +1,5 @@
 import '../App.css'
-import * as header from '/style_components/Header.styled.js'
+import * as header from './style_components/Header.styled.js'
 import { useState } from 'react';
 import { Container } from '../App.styled.js';
 

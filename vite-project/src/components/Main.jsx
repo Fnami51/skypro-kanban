@@ -1,5 +1,5 @@
 import '../App.css'
-import * as main from '/style_components/Main.styled.js'
+import * as main from './style_components/Main.styled.js'
 import { Container } from '../App.styled.js';
 import Column from './Column.jsx';
 import { statusList } from './data.js';
