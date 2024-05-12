@@ -29,7 +29,7 @@ function Header() {
                         <p>Темная тема</p>
                         <input type="checkbox" className="checkbox" name="checkbox"/>
                     </div>
-                    <button type="button" className="_hover03"><a href="#popExit">Выйти</a></button>
+                    <button type="button" className="_hover03"><a href="exit">Выйти</a></button>
                 </div>
             </header.Navigator>					
         </header.Header>
