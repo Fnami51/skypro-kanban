@@ -60,7 +60,7 @@ export const Topic = styled.h2`
   margin-bottom: 20px;
 `
 
-export const Form = styled.div`
+export const Form = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -75,6 +75,7 @@ export const Input = styled.input`
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   outline: none;
   padding: 10px 8px;
+  margin-bottom: 7px;
 
   &::placeholder{
   font-family: "Roboto", sans-serif;
