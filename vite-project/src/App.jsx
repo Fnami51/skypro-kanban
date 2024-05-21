@@ -7,6 +7,7 @@ import Exit from './pages/ExitPage/Exit.jsx'
 import PopBrowse from './components/PopBrowse.jsx';
 import PopNewCard from './components/PopNewCard.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
+import NotFound from './pages/NotFoundPage/NotFound.jsx';
 
 function App() {
 	const isAuth = true;
@@ -22,6 +23,7 @@ function App() {
 		</Route>
 		<Route path={'/login'} element={<Login />}></Route>
 		<Route path={'/registr'} element={<Registr />}></Route>
+		<Route path={'/*'} element={<NotFound />}></Route>
 	</Routes>
   )
 }
