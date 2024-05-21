@@ -2,7 +2,6 @@ import '../App.css'
 import Calendar from './Calendar.jsx';
 
 function PopNewCard({onCardAdd}) {
-    
 
     return <div className="pop-new-card" id="popNewCard">
     <div className="pop-new-card__container">

@@ -2,6 +2,7 @@ import '../App.css'
 import * as header from './style_components/Header.styled.js'
 import { useState } from 'react';
 import { Container } from '../App.styled.js';
+import { Link } from 'react-router-dom';
 
 function Header() {
     const [isOpen, setIsOpen] = useState(false)
@@ -19,7 +20,7 @@ function Header() {
                 <a href="" target="_self"><img src="images/logo_dark.png" alt="logo"/></a>
             </div>
             <header.Navigator>
-                <button className="header__btn-main-new _hover01" id="btnMainNew"><a href="#popNewCard">Создать новую задачу</a></button>
+                <button className="header__btn-main-new _hover01" id="btnMainNew"><Link to={'/newcard'}>Создать новую задачу</Link></button>
                 <a onClick={openMenu} className="header__user _hover02">Ivan Ivanov</a>
             
                 <div style={isOpen ? {display: "block"} : {display: "none"}} className="header__pop-user-set pop-user-set" id="user-set-target">

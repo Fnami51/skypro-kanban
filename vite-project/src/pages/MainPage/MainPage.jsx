@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import '../../App.css'
 import { Wrapper } from '../style_pages/Login.styled.js'
-import PopNewCard from '../../components/PopNewCard.jsx'
-import PopBrowse from '../../components/PopBrowse.jsx'
 import Header from '../../components/Header.jsx'
 import Main from '../../components/Main.jsx'
 import Loading from '../../components/Loading.jsx'
@@ -12,7 +10,7 @@ import { Outlet } from 'react-router-dom'
 function MainPage() {
 	const [cards, setCards] = useState(cardList);
 
-	function onCardAdd() {
+	/*function onCardAdd() {
         setCards((prevCards) => {
             return [...prevCards, {
                 id: cardList.length + 1,
@@ -22,7 +20,7 @@ function MainPage() {
                 status: "Без статуса",
             }]
         });
-    }
+    }*/
 
 	const [isLoading, setIsLoading] = useState(true); //DEMO
 	function changeLoadingState() {setIsLoading(false)} //DEMO
@@ -34,11 +32,7 @@ function MainPage() {
   return (
     <Wrapper>
 
-	<PopNewCard onCardAdd={onCardAdd}/>
-
-	
-
-    <Outlet /> {<PopBrowse />}
+    <Outlet />
 
     <Header />
 		

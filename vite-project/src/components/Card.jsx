@@ -14,9 +14,9 @@ function Card({ id, topic, title, date }) {
             </card.Topic>
             <Link to={'/card/' + String(id)} target="_self">
                 <card.Button>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <card.CardBtnDiv></card.CardBtnDiv>
+                    <card.CardBtnDiv></card.CardBtnDiv>
+                    <card.CardBtnDiv></card.CardBtnDiv>
                 </card.Button>
             </Link>
         </card.Group>

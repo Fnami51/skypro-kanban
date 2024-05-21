@@ -83,3 +83,10 @@ export const DateText = styled.p`
   color: #94A6BE;
   letter-spacing: 0.2px;
 `;
+
+export const CardBtnDiv = styled.div`
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #94a6be;
+`;
