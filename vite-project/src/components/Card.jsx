@@ -1,21 +1,24 @@
+import { Link } from 'react-router-dom';
 import '../App.css'
 import { getStyle } from './data.js';
 import * as card from './style_components/Card.styled.js'
 
-function Card({ topic, title, date }) {
+function Card({ id, topic, title, date }) {
+
+
     return <card.Item>
     <card.Card>
         <card.Group>
             <card.Topic className={getStyle(topic)}>
                 <card.TopicName className={getStyle(topic)}>{topic}</card.TopicName>
             </card.Topic>
-            <a href="#popBrowse" target="_self">
+            <Link to={'/card/' + String(id)} target="_self">
                 <card.Button>
                     <div></div>
                     <div></div>
                     <div></div>
                 </card.Button>
-            </a>
+            </Link>
         </card.Group>
         <card.Content>
             <a href="" target="_blank">

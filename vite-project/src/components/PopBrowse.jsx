@@ -1,5 +1,7 @@
 import '../App.css'
 import Calendar from './Calendar.jsx';
+//import { cardList } from './data.js';
+
 
 function PopBrowse() {
     return <div className="pop-browse" id="popBrowse">
