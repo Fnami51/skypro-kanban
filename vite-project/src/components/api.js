@@ -5,6 +5,11 @@
 function cheakOnline() {if (!navigator.onLine) {
     throw new Error("Нет интернета");
   }} 
+
+function addBearer(token) {
+    return `Bearer ${token}`
+}
+
   export function registerUser( login, name, password ) {
   cheakOnline()
   return fetch("https://wedev-api.sky.pro/api/user", {
@@ -37,3 +42,82 @@ export function loginUser( login, password ) {
       return response.json();
     });
   }
+
+   
+  export function getCards( {token} ) {
+  cheakOnline()
+  return fetch("https://wedev-api.sky.pro/api/kanban", {
+    method: "GET",
+    headers: {
+      Authorization: addBearer(token),
+    },
+  }).then((response) => {
+    console.log(response)
+    if (response.status === 401) {
+      throw new Error("Вы не зарегестрированы");
+    } 
+    return response.json();
+  });
+}
+
+export function postCards( {token, title, topic, status, text, date} ) {
+  cheakOnline()
+  return fetch("https://wedev-api.sky.pro/api/kanban", {
+    method: "POST",
+    headers: {
+      Authorization: addBearer(token),
+    },
+    body: JSON.stringify({
+      "title": title,
+      "topic": topic,
+      "status": status,
+      "descriptoin": text,
+      "date": date,
+    }),
+  }).then((response) => {
+    console.log(response)
+    if (response.status === 401) {
+      throw new Error("Вы не зарегестрированы");
+    } 
+    return response.json();
+  });
+}
+
+export function putCards( {id, token, title, topic, status, text, date} ) {
+  cheakOnline()
+  return fetch("https://wedev-api.sky.pro/api/kanban/" + id, {
+    method: "PUT",
+    headers: {
+      Authorization: addBearer(token),
+    },
+    body: JSON.stringify({
+      "title": title,
+      "topic": topic,
+      "status": status,
+      "descriptoin": text,
+      "date": date,
+    }),
+  }).then((response) => {
+    console.log(response)
+    if (response.status === 401) {
+      throw new Error("Вы не зарегестрированы");
+    } 
+    return response.json();
+  });
+}
+
+export function deleteCards( {id, token} ) {
+  cheakOnline()
+  return fetch("https://wedev-api.sky.pro/api/kanban/" + id, {
+    method: "DELETE",
+    headers: {
+      Authorization: addBearer(token),
+    },
+  }).then((response) => {
+    console.log(response)
+    if (response.status === 401) {
+      throw new Error("Вы не зарегестрированы");
+    } 
+    return response.json();
+  });
+}
