@@ -1,13 +1,25 @@
 import * as login from '../style_pages/Login.styled.js';
 import { Link, useNavigate } from 'react-router-dom'
 
+import { loginUser } from '../../components/api.js';
 function Login() {
     let navigate = useNavigate();
-      
     function handleSubmit(event) {
         event.preventDefault();
-          // Потом использовать переменную isAuth, когда подключем сервис с пользователями.
-        navigate('/');
+        try {
+            const login = event.target.formlogin.value
+            const password = event.target.formpassword.value
+            loginUser(login, password ).then((data) => {
+                localStorage.setItem("user", data.user) 
+                localStorage.setItem("token", data.user.token)
+                navigate('/');
+            });
+            
+
+        } catch (error) {
+            console.log('Error', error)
+        }
+            
     }
 
     return (

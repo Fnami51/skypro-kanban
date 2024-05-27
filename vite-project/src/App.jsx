@@ -8,11 +8,16 @@ import PopBrowse from './components/PopBrowse.jsx';
 import PopNewCard from './components/PopNewCard.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import NotFound from './pages/NotFoundPage/NotFound.jsx';
+import { UserProvider} from './components/UserContext.jsx';
+
 
 function App() {
-	const isAuth = true;
-
+	console.log(localStorage.getItem("token"))
+  const isAuth = Boolean(localStorage.getItem("token"));
+  console.log(isAuth)
+  
   return (
+	<UserProvider>
 	<Routes>
 		<Route element={<PrivateRoute isAuth={isAuth} />}>
 			<Route path={'/'} element={<MainPage />}>
@@ -25,6 +30,7 @@ function App() {
 		<Route path={'/registr'} element={<Registr />}></Route>
 		<Route path={'/*'} element={<NotFound />}></Route>
 	</Routes>
+	</UserProvider>
   )
 }
 
