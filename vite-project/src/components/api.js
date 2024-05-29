@@ -20,7 +20,6 @@ function addBearer(token) {
       "password": password
     }),
   }).then((response) => {
-    console.log(response)
     if (response.status === 400) {
       throw new Error("Такой пользователь уже существует");
     } 
@@ -44,7 +43,7 @@ export function loginUser( login, password ) {
   }
 
    
-  export function getCards( {token} ) {
+  export function getCards(token) {
   cheakOnline()
   return fetch("https://wedev-api.sky.pro/api/kanban", {
     method: "GET",
@@ -52,7 +51,6 @@ export function loginUser( login, password ) {
       Authorization: addBearer(token),
     },
   }).then((response) => {
-    console.log(response)
     if (response.status === 401) {
       throw new Error("Вы не зарегестрированы");
     } 
@@ -60,7 +58,7 @@ export function loginUser( login, password ) {
   });
 }
 
-export function postCards( {token, title, topic, status, text, date} ) {
+export function postCards(token, title, topic, status, text, date) {
   cheakOnline()
   return fetch("https://wedev-api.sky.pro/api/kanban", {
     method: "POST",
@@ -75,7 +73,6 @@ export function postCards( {token, title, topic, status, text, date} ) {
       "date": date,
     }),
   }).then((response) => {
-    console.log(response)
     if (response.status === 401) {
       throw new Error("Вы не зарегестрированы");
     } 
@@ -98,7 +95,6 @@ export function putCards( {id, token, title, topic, status, text, date} ) {
       "date": date,
     }),
   }).then((response) => {
-    console.log(response)
     if (response.status === 401) {
       throw new Error("Вы не зарегестрированы");
     } 
@@ -114,7 +110,6 @@ export function deleteCards( {id, token} ) {
       Authorization: addBearer(token),
     },
   }).then((response) => {
-    console.log(response)
     if (response.status === 401) {
       throw new Error("Вы не зарегестрированы");
     } 

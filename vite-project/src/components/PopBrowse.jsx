@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import '../App.css'
 import Calendar from './Calendar.jsx';
-import { cardList } from './data.js';
+import { cardList, getStyle } from './data.js';
 
 
 function PopBrowse() {
@@ -17,7 +17,7 @@ function PopBrowse() {
                 <div className="pop-browse__top-block">
                     <h3 className="pop-browse__ttl">{card.title}</h3>
                     <div className="categories__theme theme-top _orange _active-category">
-                        <p className="_orange">{card.topic}</p>
+                        <p className={getStyle(card.topic)}>{card.topic}</p>
                     </div>
                 </div>
                 <div className="pop-browse__status status">
