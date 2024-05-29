@@ -10,7 +10,7 @@ function Column({ title, cardInColumn }) {
     <column.Cards>
         {cardInColumn.map((card) => 
             <Card 
-                key={card.id}
+                key={card._id}
                 id={card.id}
                 topic={card.topic}
                 title={card.title}

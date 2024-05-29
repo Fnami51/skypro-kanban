@@ -5,6 +5,7 @@ import Column from './Column.jsx';
 import { statusList } from './data.js';
 
 function Main({cards}) {
+    console.log("in Main.jsx",cards)
     return <main.Background>
     <Container>
         

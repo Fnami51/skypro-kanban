@@ -1,7 +1,11 @@
 import '../App.css'
 import Calendar from './Calendar.jsx';
+import { UserContext } from '../App.jsx';
+import { useContext } from 'react';
 
 function PopNewCard({onCardAdd}) {
+
+const task = useContext(UserContext);
 
     return <div className="pop-new-card" id="popNewCard">
     <div className="pop-new-card__container">
@@ -13,7 +17,7 @@ function PopNewCard({onCardAdd}) {
                     <form className="pop-new-card__form form-new" id="formNewCard" action="#">
                         <div className="form-new__block">
                             <label htmlFor="formTitle" className="subttl">Название задачи</label>
-                            <input className="form-new__input" type="text" name="name" id="formTitle" placeholder="Введите название задачи..." autoFocus/>
+                            <input className="form-new__input" type="text" name="name" id="formTitle" onChange={e => task.setName(e.target.value)} placeholder="Введите название задачи..." autoFocus/>
                         </div>
                         <div className="form-new__block">
                             <label htmlFor="textArea" className="subttl">Описание задачи</label>

@@ -55,7 +55,7 @@ export function loginUser( login, password ) {
       throw new Error("Вы не зарегестрированы");
     } 
     return response.json();
-  });
+  })
 }
 
 export function postCards(token, title, topic, status, text, date) {
