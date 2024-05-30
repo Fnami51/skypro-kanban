@@ -11,7 +11,7 @@ function Login() {
             const password = event.target.formpassword.value
             loginUser(login, password ).then((data) => {
                 localStorage.setItem("user", data.user) 
-                localStorage.setItem("token", data.user.token)
+                //localStorage.setItem("token", data.user.token)
                 navigate('/');
             });
             
