@@ -1,11 +1,33 @@
 import '../App.css'
 import Calendar from './Calendar.jsx';
-import { UserContext } from '../App.jsx';
-import { useContext } from 'react';
+import { postCards } from './api.js';
+import useTasks from '../hooks/useTasks.js';
+import { useState } from 'react';
 
-function PopNewCard({onCardAdd}) {
 
-const task = useContext(UserContext);
+
+function PopNewCard() {
+
+    const {setTasks} = useTasks()
+
+    const {selected, setSelected} = useState(null)
+
+    function onCardAdd() {
+        postCards(localStorage.getItem("token"), task.title, task.topic, task.status, task.description, task.date)
+		.then(data => { 
+			setTasks(data.tasks); 
+		})
+		.catch(error => { 
+			console.log('Error', error); 
+		});
+    }
+
+const [task, setTask] = useState({
+    title: "", 
+    topic: "Research", 
+    status: "Без статуса", 
+    description: "", 
+    date: selected})
 
     return <div className="pop-new-card" id="popNewCard">
     <div className="pop-new-card__container">
@@ -17,11 +39,11 @@ const task = useContext(UserContext);
                     <form className="pop-new-card__form form-new" id="formNewCard" action="#">
                         <div className="form-new__block">
                             <label htmlFor="formTitle" className="subttl">Название задачи</label>
-                            <input className="form-new__input" type="text" name="name" id="formTitle" onChange={title => task.setName(title.target.value)} placeholder="Введите название задачи..." autoFocus/>
+                            <input className="form-new__input" type="text" name="title" id="formTitle" onChange={e => setTask({...task, title: e.target.value})} placeholder="Введите название задачи..." autoFocus/>
                         </div>
                         <div className="form-new__block">
                             <label htmlFor="textArea" className="subttl">Описание задачи</label>
-                            <textarea className="form-new__area" name="text" id="textArea"  placeholder="Введите описание задачи..."></textarea>
+                            <textarea className="form-new__area" name="description" id="textArea" onChange={e => setTask({...task, description: e.target.value})}  placeholder="Введите описание задачи..."></textarea>
                         </div>
                     </form>
                     <div className="pop-new-card__calendar calendar">
@@ -42,7 +64,7 @@ const task = useContext(UserContext);
                                     </div>
                                 </div>
                             </div>
-                            <Calendar />
+                            <Calendar selected={selected} setSelected={setSelected}/>
                             
                             <input type="hidden" id="datepick_value" value="08.09.2023"/>
                             <div className="calendar__period">
@@ -55,13 +77,13 @@ const task = useContext(UserContext);
                     <p className="categories__p subttl">Категория</p>
                     <div className="categories__themes">
                         <div className="categories__theme _orange _active-category">
-                            <p className="_orange">Web Design</p>
+                            <input type="radio" name="topic" value="Web Design" onChange={() => setTask({...task, topic : "Web Design"})} className="_orange">Web Design</input>
                         </div>
                         <div className="categories__theme _green">
-                            <p className="_green">Research</p>
+                            <input type="radio" name="topic" value="Research" onChange={() => setTask({...task, topic : "Research"})} className="_green">Research</input>
                         </div>
                         <div className="categories__theme _purple">
-                            <p className="_purple">Copywriting</p>
+                            <input type="radio" name="topic" value="Copywriting" onChange={() => setTask({...task, topic : "Copywriting"})} className="_purple">Copywriting</input>
                         </div>
                     </div>
                 </div>

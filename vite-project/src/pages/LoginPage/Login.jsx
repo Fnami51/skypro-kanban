@@ -4,14 +4,16 @@ import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '../../components/api.js';
 function Login() {
     let navigate = useNavigate();
+    
     function handleSubmit(event) {
         event.preventDefault();
         try {
             const login = event.target.formlogin.value
             const password = event.target.formpassword.value
             loginUser(login, password ).then((data) => {
-                localStorage.setItem("user", data.user) 
-                //localStorage.setItem("token", data.user.token)
+                localStorage.setItem("name", data.user.name)
+                localStorage.setItem("email", data.user.login) 
+                localStorage.setItem("token", data.user.token)
                 navigate('/');
             });
             

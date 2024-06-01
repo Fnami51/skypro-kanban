@@ -1,6 +1,6 @@
 import '../App.css'
 
-function Calendar() {
+function Calendar({selected, setSelected}) {
     return <div className="calendar__content">
     <div className="calendar__days-names">
         <div className="calendar__day-name">пн</div>

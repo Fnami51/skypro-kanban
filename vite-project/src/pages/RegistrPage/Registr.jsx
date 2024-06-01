@@ -11,7 +11,8 @@ function Registr() {
             const login = event.target.loginReg.value
             const password = event.target.passwordFirst.value
             registerUser(login, name, password ).then((data) => {
-                localStorage.setItem("user", data.user) 
+                localStorage.setItem("name", data.user.name)
+                localStorage.setItem("email", data.user.login) 
                 localStorage.setItem("token", data.user.token)
                 navigate('/');
             });
