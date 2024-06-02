@@ -102,7 +102,7 @@ export function putCards( {id, token, title, topic, status, text, date} ) {
   });
 }
 
-export function deleteCards( {id, token} ) {
+export function deleteCards( id, token ) {
   cheakOnline()
   return fetch("https://wedev-api.sky.pro/api/kanban/" + id, {
     method: "DELETE",
