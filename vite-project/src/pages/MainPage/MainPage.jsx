@@ -10,7 +10,7 @@ import useTasks from '../../hooks/useTasks.js'
 
 function MainPage() {
 
-  const {tasks, setTasks} = useTasks()
+  const {setTasks} = useTasks()
 
 	const [isLoading, setIsLoading] = useState(true); //DEMO
 	function changeLoadingState() {setIsLoading(false)} //DEMO
@@ -35,7 +35,7 @@ function MainPage() {
 
     <Header />
 		
-	{isLoading ? <Loading/> : <Main cards={tasks} isLoading={isLoading}/>}
+	{isLoading ? <Loading/> : <Main isLoading={isLoading}/>}
     </Wrapper>
   )
 }
