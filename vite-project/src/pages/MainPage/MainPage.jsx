@@ -5,8 +5,12 @@ import Header from '../../components/Header.jsx'
 import Main from '../../components/Main.jsx'
 import Loading from '../../components/Loading.jsx'
 import { Outlet } from 'react-router-dom'
+import { getCards } from '../../components/api.js'
+import useTasks from '../../hooks/useTasks.js'
 
-function MainPage({cards}) {
+function MainPage() {
+
+  const {setTasks} = useTasks()
 
 	const [isLoading, setIsLoading] = useState(true); //DEMO
 	function changeLoadingState() {setIsLoading(false)} //DEMO
@@ -15,6 +19,15 @@ function MainPage({cards}) {
 		setTimeout(changeLoadingState, 2000)
 	}, []);
 
+  useEffect(() => {  
+    getCards(localStorage.getItem("token"))
+    .then(data => { 
+      setTasks(data.tasks); 
+      console.log(data.tasks); })
+      .catch(error => { 
+        console.log('Error', error); 
+      }); }, []);
+
   return (
     <Wrapper>
 
@@ -22,7 +35,7 @@ function MainPage({cards}) {
 
     <Header />
 		
-	{isLoading ? <Loading/> : <Main cards={cards} isLoading={isLoading}/>}
+	{isLoading ? <Loading/> : <Main isLoading={isLoading}/>}
     </Wrapper>
   )
 }

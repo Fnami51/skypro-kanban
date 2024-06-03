@@ -3,8 +3,11 @@ import * as main from './style_components/Main.styled.js'
 import { Container } from '../App.styled.js';
 import Column from './Column.jsx';
 import { statusList } from './data.js';
+import useTasks from '../hooks/useTasks.js';
 
-function Main({cards}) {
+function Main() {
+    const {tasks} = useTasks()
+
     return <main.Background>
     <Container>
         
@@ -14,7 +17,7 @@ function Main({cards}) {
                 <Column
                     key={status}
                     title={status}
-                    cardInColumn={cards.filter((card) => card.status === status)}
+                    cardInColumn={tasks.filter((card) => card.status === status)}
             />))}
         </main.Content>
         

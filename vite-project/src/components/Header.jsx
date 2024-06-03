@@ -21,15 +21,12 @@ function Header() {
             </div>
             <header.Navigator>
                 <button className="header__btn-main-new _hover01" id="btnMainNew"><Link to={'/newcard'}>Создать новую задачу</Link></button>
-                <a onClick={openMenu} className="header__user _hover02">Ivan Ivanov</a>
-            
+                <a onClick={openMenu} className="header__user _hover02">{localStorage.getItem("name")}</a>
+                
                 <div style={isOpen ? {display: "block"} : {display: "none"}} className="header__pop-user-set pop-user-set" id="user-set-target">
-                    <p className="pop-user-set__name">Ivan Ivanov</p>
-                    <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-                    <div className="pop-user-set__theme">
-                        <p>Темная тема</p>
-                        <input type="checkbox" className="checkbox" name="checkbox"/>
-                    </div>
+                    <p className="pop-user-set__name">{localStorage.getItem("name")}</p>
+                    <p className="pop-user-set__mail">{localStorage.getItem("email")}</p>
+                    
                     <button type="button" className="_hover03"><a href="exit">Выйти</a></button>
                 </div>
             </header.Navigator>					
@@ -39,3 +36,10 @@ function Header() {
   }
   
   export default Header;
+
+/*
+<div className="pop-user-set__theme">
+    <p>Темная тема</p>
+    <input type="checkbox" className="checkbox" name="checkbox"/>
+</div>
+*/
