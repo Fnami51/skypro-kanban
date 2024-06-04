@@ -278,7 +278,7 @@ body {
 .pop-user-set button a {
   color: #565EEF;
 }
-
+/*
 .pop-new-card {
   width: 100%;
   min-width: 375px;
@@ -322,6 +322,7 @@ body {
   line-height: 24px;
   margin-bottom: 20px;
 }
+*/
 .pop-new-card__close {
   position: absolute;
   top: 20px;
