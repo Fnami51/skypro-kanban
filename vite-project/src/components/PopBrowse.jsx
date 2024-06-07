@@ -1,34 +1,58 @@
 import { useParams, Link } from 'react-router-dom';
-import '../App.css'
 import Calendar from './Calendar.jsx';
 import { getStyle } from './data.js';
 import useTasks from '../hooks/useTasks.js';
-import * as changeCSS from "./helpers.js"
-import { useState } from 'react';
-import { deleteCards } from './api.js';
+import { useEffect, useState } from 'react';
+import { deleteCards, putCards } from './api.js';
 import { useNavigate } from 'react-router-dom';
+import * as PB from './style_components/PopBrowse.styled.js'
+import * as CC from './style_components/CommonComponents.styled.js'
 
+
+//Не забудь исправить стили в кнопках
 
 
 function PopBrowse() {
     let navigate = useNavigate();
-    const params = useParams();
+    const {cardId} = useParams();
+    const [date, setNewDate] = useState(new Date());
+    const token = localStorage.getItem("token")
 
     const {tasks, setTasks} = useTasks()
 
-    const {selected, setSelected} = useState(null)
-
     const [isChange, setIsChange] = useState(false)
     
-    const card = tasks.find( card => card._id === params.cardId);
+    const card = tasks.find( card => card._id === cardId);
+
+useEffect(() => {
+    setNewDate(new Date(card.date))
+}, [card])
 
     function changeCard() {
         setIsChange((prevState) => !prevState);
-        console.log(isChange ? `Задача изменяется >> isChange = ${isChange}` : `Задача статична >> isChange = ${isChange}`)
+        // дописать функционал
     }
 
+    const [task, setTask] = useState({
+        title: card.title, 
+        topic: card.topic, 
+        status: card.status, 
+        description: card.description,
+    })
+
+
+        function saveCard() {
+            putCards({...task, id: cardId, token, date}).then(data => { 
+                setTasks(data.tasks); 
+                navigate('/');
+            })
+            .catch(error => { 
+                console.log('Error', error); 
+            });
+        }
+
     function deleteCard() {
-        deleteCards(card._id , localStorage.getItem("token"))
+        deleteCards(card._id , token)
         .then(data => { 
 			setTasks(data.tasks); 
             navigate('/');
@@ -38,82 +62,111 @@ function PopBrowse() {
 		});
     }
 
-    return <div className="pop-browse" id="popBrowse">
-    <div className="pop-browse__container">
-        <div className="pop-browse__block">
-            <div className="pop-browse__content">
-                <div className="pop-browse__top-block">
-                    <h3 className="pop-browse__ttl">{card.title}</h3>
+    return <PB.Background id="popBrowse">
+    <PB.Container>
+        <PB.Block>
+            <PB.Content>
+                <PB.TopBlock>
+                    <PB.Title>{card.title}</PB.Title>
                     <div className={getStyle(card.topic) + " categories__theme theme-top _active-category"}>
                         <p className={getStyle(card.topic)}>{card.topic}</p>
                     </div>
-                </div>
-                <div className="pop-browse__status status">
-                    <p className="status__p subttl">Статус</p>
-                    <div className="status__themes">
-                        <div className="status__theme _hide">
-                            <p>Без статуса</p>
-                        </div>
-                        <div className="status__theme _gray">
-                            <p className="_gray">Нужно сделать</p>
-                        </div>
-                        <div className="status__theme _hide">
-                            <p>В работе</p>
-                        </div>
-                        <div className="status__theme _hide">
-                            <p>Тестирование</p>
-                        </div>
-                        <div className="status__theme _hide">
-                            <p>Готово</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="pop-browse__wrap">
-                    <form className="pop-browse__form form-browse" id="formBrowseCard" action="#">									
-                        <div className="form-browse__block">
-                            <label htmlFor="textArea01" className="subttl">Описание задачи</label>
-                            <textarea className="form-browse__area" name="text" id="textArea01"  readOnly placeholder="Введите описание задачи..."></textarea>
-                        </div>
-                    </form>
-                    <div className="pop-new-card__calendar calendar">
-                        <p className="calendar__ttl subttl">Даты</p>
-                        <div className="calendar__block">
+                </PB.TopBlock>
+
+                <PB.Status>
+                    <CC.Title>Статус</CC.Title>
+
+                        <PB.StatusThemeBlock style={isChange ? {display: "none"} : {display: "flex"}}>
+                            <PB.StatusThemeConst className="_gray">
+                                {card.status}
+                            </PB.StatusThemeConst>
+                         </PB.StatusThemeBlock>
+
+                         <PB.StatusThemeBlock style={isChange ? {display: "flex"} : {display: "none"}}>
+                            <PB.StatusInput type="radio" name="status" id="input--without_status" value="Без статуса" onChange={() => setTask({...task, status : "Без статуса"})} style={{display: "none"}}/>
+                            <PB.StatusTheme htmlFor="input--without_status">Без статуса</PB.StatusTheme>
+
+                            <PB.StatusInput type="radio" name="status" id="input--need_do" value="Нужно сделать" onChange={() => setTask({...task, status : "Нужно сделать"})} style={{display: "none"}}/>
+                            <PB.StatusTheme htmlFor="input--need_do">Нужно сделать</PB.StatusTheme>
+
+                            <PB.StatusInput type="radio" name="status" id="input--at_work" value="В работе" onChange={() => setTask({...task, status : "В работе"})} style={{display: "none"}}/>
+                            <PB.StatusTheme htmlFor="input--at_work">В работе</PB.StatusTheme>
+
+                            <PB.StatusInput type="radio" name="status" id="input--testing" value="Тестирование" onChange={() => setTask({...task, status : "Тестирование"})} style={{display: "none"}}/>
+                            <PB.StatusTheme htmlFor="input--testing">Тестирование</PB.StatusTheme>
+
+                            <PB.StatusInput type="radio" name="status" id="input--final" value="Готово" onChange={() => setTask({...task, status : "Готово"})} style={{display: "none"}}/>
+                            <PB.StatusTheme htmlFor="input--final">Готово</PB.StatusTheme>
+                         </PB.StatusThemeBlock>
+
+
+                </PB.Status>
+
+                <PB.Wrap>
+                    <PB.Form id="formBrowseCard" action="#">									
+                        <PB.FormBlock>
+                            <PB.FormTitle htmlFor="textArea01">Описание задачи</PB.FormTitle>
+                            <PB.Textarea name="text" id="textArea01" onChange={e => setTask({...task, description: e.target.value})} placeholder={card.description ? card.description : "Введите описание задачи ..."}>{card.description}</PB.Textarea>
+                        </PB.FormBlock>
+                    </PB.Form>
+                    <CC.CalendarBox>
+                        <CC.Title>Даты</CC.Title>
+                        <div style={{display: "block"}}>
                             
-                            <Calendar selected={selected} setSelected={setSelected}/>
+                            <Calendar date={date} setNewDate={setNewDate}/>
                     
-                            <input type="hidden" id="datepick_value" value={selected}/>
-                            <div className="calendar__period">
-                                <p className="calendar__p date-end">Срок исполнения: <span className="date-control">{selected}</span></p>
-                            </div>
                         </div>
-                    </div>
-                </div>
-                <div className="theme-down__categories theme-down">
-                    <p className="categories__p subttl">Категория</p>
-                    <div className="categories__theme _orange _active-category">
-                        <p className="_orange">Web Design</p>
-                    </div>
-                </div>
-                <div className="pop-browse__btn-browse ">
-                    <div className="btn-group">
-                        <button onClick={changeCard} className="btn-browse__edit _btn-bor _hover03">Редактировать задачу</button>
-                        <button onClick={deleteCard} className="btn-browse__delete _btn-bor _hover03">Удалить задачу</button>
-                    </div>
-                    <button className="btn-browse__close _btn-bg _hover01"><Link to={'/'}>Закрыть</Link></button>
-                </div>
-                <div className="pop-browse__btn-edit _hide">
-                    <div className="btn-group">
-                        <button className="btn-edit__edit _btn-bg _hover01"><a href="#">Сохранить</a></button>
-                        <button className="btn-edit__edit _btn-bor _hover03"><a href="#">Отменить</a></button>
-                        <button onClick={deleteCard} className="btn-edit__delete _btn-bor _hover03" id="btnDelete">Удалить задачу</button>
-                    </div>
-                    <button className="btn-edit__close _btn-bg _hover01"><Link to={'/'}>Закрыть</Link></button>
-                </div>
+                    </CC.CalendarBox>
+                </PB.Wrap>
+                
+
+
+                <CC.Background style={isChange ? {display: "block"} : {display: "none"}}>
+                    <CC.Title>Категория</CC.Title>
+                    <CC.ThemeBox>
+                    
+                            <CC.InputRadio type="radio" name="topic" id="input--web_design" value="Web Design" onChange={() => setTask({...task, topic : "Web Design"})} style={{display: "none"}}/>
+                            <CC.Theme className="_orange" htmlFor="input--web_design">
+                                Web Design
+                            </CC.Theme>
+                    
+                            <CC.InputRadio type="radio" name="topic" id="input--research" value="Research" onChange={() => setTask({...task, topic : "Research"})} style={{display: "none"}}/>
+                            <CC.Theme className="_green" htmlFor="input--research">
+                                Research
+                            </CC.Theme>
+                    
+                            <CC.InputRadio type="radio" name="topic" id="input--copywriting" value="Copywriting" onChange={() => setTask({...task, topic : "Copywriting"})} style={{display: "none"}}/>
+                            <CC.Theme className="_purple" htmlFor="input--copywriting">
+                                Copywriting
+                            </CC.Theme>
+                    
+                    </CC.ThemeBox>
+                </CC.Background>
+
+
+
+                <PB.ButtonBox style={isChange ? {display: "none"} : {display: "flex"}}>
+                    <PB.ButtonGroup>
+                        <PB.ButtonBOR onClick={changeCard} >Редактировать задачу</PB.ButtonBOR>
+                        <PB.ButtonBOR onClick={deleteCard} >Удалить задачу</PB.ButtonBOR>
+                    </PB.ButtonGroup>
+                    <PB.ButtonBG ><Link to={'/'} style={{color: '#fff'}}>Закрыть</Link></PB.ButtonBG>
+                </PB.ButtonBox>
+
+
+                <PB.ButtonBox style={isChange ? {display: "flex"} : {display: "none"}}>
+                    <PB.ButtonGroup>
+                        <PB.ButtonBG onClick={saveCard} style={{color: '#fff'}}>Сохранить</PB.ButtonBG>
+                        <PB.ButtonBOR onClick={changeCard} >Отменить</PB.ButtonBOR>
+                        <PB.ButtonBOR onClick={deleteCard}  id="btnDelete">Удалить задачу</PB.ButtonBOR>
+                    </PB.ButtonGroup>
+                    <PB.ButtonBG ><Link to={'/'} style={{color: '#fff'}}>Закрыть</Link></PB.ButtonBG>
+                </PB.ButtonBox>
                                         
-            </div>
-        </div>
-    </div>
-</div>;
+            </PB.Content>
+        </PB.Block>
+    </PB.Container>
+</PB.Background>;
   }
  
   export default PopBrowse;

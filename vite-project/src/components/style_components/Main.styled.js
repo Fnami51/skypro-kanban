@@ -14,4 +14,11 @@ export const Main = styled.div`
 export const Content = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: row;
+
+  @media (max-width: 1100px) {
+    flex-direction: column;
+    align-content: flex-start;
+    flex-wrap: wrap;
+  }
 `;

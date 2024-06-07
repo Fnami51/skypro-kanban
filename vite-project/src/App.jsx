@@ -1,5 +1,5 @@
 import {Route, Routes} from 'react-router-dom';
-import './App.css'
+import './color.css'
 import MainPage from './pages/MainPage/MainPage.jsx'
 import Login from './pages/LoginPage/Login.jsx'
 import Registr from './pages/RegistrPage/Registr.jsx'
@@ -12,7 +12,6 @@ import NotFound from './pages/NotFoundPage/NotFound.jsx';
 
 
 function App() {
-  console.log(localStorage.getItem("token"))
   const isAuth = Boolean(localStorage.getItem("token"));
 
 // const [cards, setCards] = useState([]);

@@ -1,21 +1,21 @@
-import '../App.css'
 import Calendar from './Calendar.jsx';
 import { postCards } from './api.js';
 import useTasks from '../hooks/useTasks.js';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import * as PNC from './style_components/PopNewCard.styled.js'
+import * as CC from './style_components/CommonComponents.styled.js'
 
 
 function PopNewCard() {
     let navigate = useNavigate();
     const {setTasks} = useTasks()
+    const [date, setNewDate] = useState(new Date());
 
-    const {selected, setSelected} = useState(null)
 
     function onCardAdd() {
-        postCards(localStorage.getItem("token"), task.title, task.topic, task.status, task.description, task.date)
+        postCards(localStorage.getItem("token"), task.title, task.topic, task.status, task.description, date)
 		.then(data => { 
 			setTasks(data.tasks);
             navigate('/');
@@ -30,57 +30,67 @@ const [task, setTask] = useState({
     topic: "Research", 
     status: "Без статуса", 
     description: "", 
-    date: selected})
+    })
 
-    return <div className="pop-new-card" id="popNewCard">
-    <div className="pop-new-card__container">
-        <div className="pop-new-card__block">
-            <div className="pop-new-card__content">
-                <h3 className="pop-new-card__ttl">Создание задачи</h3>
-                <Link to={'/'} className="pop-new-card__close">&#10006;</Link>
-                <div className="pop-new-card__wrap">
-                    <form className="pop-new-card__form form-new" id="formNewCard" action="#">
-                        <div className="form-new__block">
-                            <label htmlFor="formTitle" className="subttl">Название задачи</label>
-                            <input className="form-new__input" type="text" name="title" id="formTitle" onChange={e => setTask({...task, title: e.target.value})} placeholder="Введите название задачи..." autoFocus/>
-                        </div>
-                        <div className="form-new__block">
-                            <label htmlFor="textArea" className="subttl">Описание задачи</label>
-                            <textarea className="form-new__area" name="description" id="textArea" onChange={e => setTask({...task, description: e.target.value})}  placeholder="Введите описание задачи..."></textarea>
-                        </div>
-                    </form>
-                    <div className="pop-new-card__calendar calendar">
-                        <p className="calendar__ttl subttl">Даты</p>									
-                        <div className="calendar__block">
+    return <PNC.Background id="popNewCard">
+    <PNC.Container>
+        <PNC.Block>
+            <PNC.Content>
+                <PNC.Title>Создание задачи</PNC.Title>
+                <PNC.Close ><Link to={"/"}>&#10006;</Link></PNC.Close>
+                <PNC.Wrap>
+                    <PNC.Form id="formNewCard" action="#">
+                        <PNC.FormBlock>
+                            <label htmlFor="formTitle">
+                                <CC.Title>Название задачи</CC.Title>
+                            </label>
+                            <PNC.Input type="text" name="title" id="formTitle" onChange={e => setTask({...task, title: e.target.value})} placeholder="Введите название задачи..." autoFocus/>
+                        </PNC.FormBlock>
+                        <PNC.FormBlock>
+                            <label htmlFor="textArea">
+                                <CC.Title>Описание задачи</CC.Title>
+                            </label>
+                            <PNC.Textarea name="description" id="textArea" onChange={e => setTask({...task, description: e.target.value})}  placeholder="Введите описание задачи..."></PNC.Textarea>
+                        </PNC.FormBlock>
+                    </PNC.Form>
+
+
+                    <CC.CalendarBox>
+                        <CC.Title>Даты</CC.Title>
+                        <div style={{display: "block"}}>
                             
-                            <Calendar selected={selected} setSelected={setSelected}/>
-                            
-                            <input type="hidden" id="datepick_value" value="08.09.2023"/>
-                            <div className="calendar__period">
-                                <p className="calendar__p date-end">Выберите срок исполнения <span className="date-control"></span>.</p>
-                            </div>
+                            <Calendar date={date} setNewDate={setNewDate}/>
+                    
                         </div>
-                    </div>
-                </div>
-                <div className="pop-new-card__categories categories">
-                    <p className="categories__p subttl">Категория</p>
-                    <div className="categories__themes">
-                        <div className="categories__theme _orange _active-category">
-                            <input type="radio" name="topic" value="Web Design" onChange={() => setTask({...task, topic : "Web Design"})} className="_orange"/><label className="_orange">Web Design</label>
-                        </div>
-                        <div className="categories__theme _green">
-                            <input type="radio" name="topic" value="Research" onChange={() => setTask({...task, topic : "Research"})} className="_green"/><label className="_green">Research</label>
-                        </div>
-                        <div className="categories__theme _purple">
-                            <input type="radio" name="topic" value="Copywriting" onChange={() => setTask({...task, topic : "Copywriting"})} className="_purple"/><label className="_purple">Copywriting</label>
-                        </div>
-                    </div>
-                </div>
-                <button onClick={onCardAdd} className="form-new__create _hover01" id="btnCreate">Создать задачу</button>
-            </div>
-        </div>
-    </div>
-</div>;
+                    </CC.CalendarBox>
+
+                </PNC.Wrap>
+                <CC.Background>
+                    <CC.Title>Категория</CC.Title>
+                    <CC.ThemeBox>
+                    
+                            <CC.InputRadio type="radio" name="topic" id="input--web_design" value="Web Design" onChange={() => setTask({...task, topic : "Web Design"})} style={{display: "none"}}/>
+                            <CC.Theme className="_orange" htmlFor="input--web_design">
+                                Web Design
+                            </CC.Theme>
+                    
+                            <CC.InputRadio type="radio" name="topic" id="input--research" value="Research" onChange={() => setTask({...task, topic : "Research"})} style={{display: "none"}}/>
+                            <CC.Theme className="_green" htmlFor="input--research">
+                                Research
+                            </CC.Theme>
+                    
+                            <CC.InputRadio type="radio" name="topic" id="input--copywriting" value="Copywriting" onChange={() => setTask({...task, topic : "Copywriting"})} style={{display: "none"}}/>
+                            <CC.Theme className="_purple" htmlFor="input--copywriting">
+                                Copywriting
+                            </CC.Theme>
+                    
+                    </CC.ThemeBox>
+                </CC.Background>
+                <PNC.Button onClick={onCardAdd} id="btnCreate">Создать задачу</PNC.Button>
+            </PNC.Content>
+        </PNC.Block>
+    </PNC.Container>
+</PNC.Background>;
   }
  
   export default PopNewCard;

@@ -1,17 +1,18 @@
-import '../App.css'
+import * as main from './style_components/Main.styled.js'
+import { Container } from '../App.styled.js';
 
 function Loading() {
-    return <main className="main">
-    <div className="container">
+    return <main.Background>
+    <Container>
         
-        <div className="main__block">
-        <div className="main__content">
-            <p>Загрузка данных ...</p>
-        </div>
+        <main.Main>
+        <main.Content>
+            Загрузка ...
+        </main.Content>
         
-        </div>
-    </div>
-</main>;
+        </main.Main>
+    </Container>
+</main.Background>;
   }
   
   export default Loading;

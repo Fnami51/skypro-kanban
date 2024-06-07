@@ -1,4 +1,4 @@
-import '../App.css'
+
 import * as column from './style_components/Column.styled.js'
 import Card from './Card.jsx';
 
