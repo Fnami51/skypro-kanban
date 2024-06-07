@@ -20,7 +20,13 @@ export const TitleFrames = styled.div`
 `;
 
 export const Cards = styled.div`
-  width: 100%;
-  display: block;
+  width: 220px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 1100px) {
+    flex-direction: row;
+    align-content: flex-start;
+  }
 `;

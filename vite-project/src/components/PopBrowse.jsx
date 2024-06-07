@@ -8,9 +8,11 @@ import { useState } from 'react';
 import { deleteCards } from './api.js';
 import { useNavigate } from 'react-router-dom';
 import useDate from '../hooks/useDate.js';
-import * as pb from './style_components/PopBrowse.styled.js'
-import * as categories from './style_components/Categories.styled.js'
+import * as PB from './style_components/PopBrowse.styled.js'
+import * as CC from './style_components/CommonComponents.styled.js'
 
+
+//Не забудь исправить стили в кнопках
 
 
 function PopBrowse() {
@@ -26,8 +28,16 @@ function PopBrowse() {
 
     function changeCard() {
         setIsChange((prevState) => !prevState);
-        console.log(isChange ? `Задача изменяется >> isChange = ${isChange}` : `Задача статична >> isChange = ${isChange}`)
+        // дописать функционал
     }
+
+    const [task, setTask] = useState({
+        title: card.title, 
+        topic: card.topic, 
+        status: card.status, 
+        description: card.description, 
+        date: card.date})
+
 
     function deleteCard() {
         deleteCards(card._id , localStorage.getItem("token"))
@@ -40,71 +50,89 @@ function PopBrowse() {
 		});
     }
 
-    return <pb.Background id="popBrowse">
-    <pb.Container>
-        <pb.Block>
-            <pb.Content>
-                <pb.TopBlock>
-                    <pb.Title>{card.title}</pb.Title>
+    return <PB.Background id="popBrowse">
+    <PB.Container>
+        <PB.Block>
+            <PB.Content>
+                <PB.TopBlock>
+                    <PB.Title>{card.title}</PB.Title>
                     <div className={getStyle(card.topic) + " categories__theme theme-top _active-category"}>
                         <p className={getStyle(card.topic)}>{card.topic}</p>
                     </div>
-                </pb.TopBlock>
+                </PB.TopBlock>
 
-                <div className="pop-browse__status status">
-                    <p className="status__p subttl">Статус</p>
-                        {isChange ? <component.StatusChange status={card.status}/> : <component.StatusConst status={card.status}/>}
-                </div>
+                <PB.Status>
+                    <CC.Title>Статус</CC.Title>
 
-                <pb.Wrap>
-                    <form className="pop-browse__form form-browse" id="formBrowseCard" action="#">									
-                        <div className="form-browse__block">
+                        {isChange ? <component.StatusChange /> : <component.StatusConst status={card.status}/>}
+                </PB.Status>
+
+                <PB.Wrap>
+                    <PB.Form id="formBrowseCard" action="#">									
+                        <PB.FormBlock>
                             <label htmlFor="textArea01" className="subttl">Описание задачи</label>
-                            <textarea className="form-browse__area" name="text" id="textArea01"  readOnly placeholder="Введите описание задачи..."></textarea>
-                        </div>
-                    </form>
-                    <categories.CalendarBox>
-                        <p className="calendar__ttl subttl">Даты</p>
-                        <div className="calendar__block">
+                            <PB.Textarea name="text" id="textArea01"  readOnly placeholder="Введите описание задачи..."></PB.Textarea>
+                        </PB.FormBlock>
+                    </PB.Form>
+                    <CC.CalendarBox>
+                        <CC.Title>Даты</CC.Title>
+                        <div style={{display: "block"}}>
                             
                             <Calendar />
                     
                             <input type="hidden" id="datepick_value" value={dateInContext}/>
                         </div>
-                    </categories.CalendarBox>
-                </pb.Wrap>
+                    </CC.CalendarBox>
+                </PB.Wrap>
                 
 
 
-                <div className="theme-down__categories theme-down _hide">
-                    <p className="categories__p subttl">Категория</p>
-                    <div className="categories__theme _orange _active-category">
-                        <p className="_orange">Web Design</p>
-                    </div>
-                </div>
+                <CC.Background style={isChange ? {display: "block"} : {display: "none"}}>
+                    <CC.Title>Категория</CC.Title>
+                    <CC.ThemeBox>
+                    
+                            <input type="radio" name="topic" id="input--web_design" value="Web Design" onChange={() => setTask({...task, topic : "Web Design"})} style={{display: "none"}}/>
+                            <CC.Theme className="_orange" htmlFor="input--web_design">
+                                Web Design
+                            </CC.Theme>
+                    
+                            <input type="radio" name="topic" id="input--research" value="Research" onChange={() => setTask({...task, topic : "Research"})} style={{display: "none"}}/>
+                            <CC.Theme className="_green" htmlFor="input--research">
+                                Research
+                            </CC.Theme>
+                    
+                            <input type="radio" name="topic" id="input--copywriting" value="Copywriting" onChange={() => setTask({...task, topic : "Copywriting"})} style={{display: "none"}}/>
+                            <CC.Theme className="_purple" htmlFor="input--copywriting">
+                                Copywriting
+                            </CC.Theme>
+                    
+                    </CC.ThemeBox>
+                </CC.Background>
 
-                <pb.ButtonBox style={isChange ? {display: "none"} : {display: "flex"}}>
-                    <pb.ButtonGroup>
-                        <pb.Button onClick={changeCard} className="btn-browse__edit _btn-bor _hover03">Редактировать задачу</pb.Button>
-                        <pb.Button onClick={deleteCard} className="btn-browse__delete _btn-bor _hover03">Удалить задачу</pb.Button>
-                    </pb.ButtonGroup>
-                    <pb.Button className="btn-browse__close _btn-bg _hover01"><Link to={'/'}>Закрыть</Link></pb.Button>
-                </pb.ButtonBox>
 
 
-                <pb.ButtonBox style={isChange ? {display: "flex"} : {display: "none"}}>
-                    <pb.ButtonGroup>
-                        <pb.Button className="btn-edit__edit _btn-bg _hover01"><a href="#">Сохранить</a></pb.Button>
-                        <pb.Button onClick={changeCard} className="btn-edit__edit _btn-bor _hover03">Отменить</pb.Button>
-                        <pb.Button onClick={deleteCard} className="btn-edit__delete _btn-bor _hover03" id="btnDelete">Удалить задачу</pb.Button>
-                    </pb.ButtonGroup>
-                    <pb.Button className="btn-edit__close _btn-bg _hover01"><Link to={'/'}>Закрыть</Link></pb.Button>
-                </pb.ButtonBox>
+                <PB.ButtonBox style={isChange ? {display: "none"} : {display: "flex"}}>
+                    <PB.ButtonGroup>
+                        <PB.Button onClick={changeCard} className="btn-browse__edit _btn-bor _hover03">Редактировать задачу</PB.Button>
+                        <PB.Button onClick={deleteCard} className="btn-browse__delete _btn-bor _hover03">Удалить задачу</PB.Button>
+                    </PB.ButtonGroup>
+                    <PB.Button className="btn-browse__close _btn-bg _hover01"><Link to={'/'}>Закрыть</Link></PB.Button>
+                </PB.ButtonBox>
+
+
+                <PB.ButtonBox style={isChange ? {display: "flex"} : {display: "none"}}>
+                    <PB.ButtonGroup>
+                        <PB.Button className="btn-edit__edit _btn-bg _hover01"><a href="#">Сохранить</a></PB.Button>
+                        <PB.Button onClick={changeCard} className="btn-edit__edit _btn-bor _hover03">Отменить</PB.Button>
+                        <PB.Button onClick={deleteCard} className="btn-edit__delete _btn-bor _hover03" id="btnDelete">Удалить задачу</PB.Button>
+                    </PB.ButtonGroup>
+                    <PB.Button className="btn-edit__close _btn-bg _hover01"><Link to={'/'}>Закрыть</Link></PB.Button>
+                </PB.ButtonBox>
                                         
-            </pb.Content>
-        </pb.Block>
-    </pb.Container>
-</pb.Background>;
+            </PB.Content>
+        </PB.Block>
+    </PB.Container>
+</PB.Background>;
   }
  
   export default PopBrowse;

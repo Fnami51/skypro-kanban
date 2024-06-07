@@ -63,7 +63,54 @@ export const Wrap = styled.div`
   justify-content: space-between;
 `
 
+export const Status = styled.div`
+margin-bottom: 11px;
+`
 
+export const StatusTitle = styled.p`
+margin-bottom: 14px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+`
+
+export const Form = styled.form`
+  max-width: 370px;
+  width: 100%;
+  display: block;
+  margin-bottom: 20px;
+`
+
+export const FormBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const Textarea = styled.textarea`
+max-width: 370px;
+  width: 100%;
+  outline: none;
+  padding: 14px;
+  background: #EAEEF6;
+  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.14px;
+  margin-top: 14px;
+  height: 200px;
+
+  &::placeholder{
+    font-weight: 400;
+  font-size: 14px;
+  line-height: 1px;
+  color: #94A6BE;
+  letter-spacing: -0.14px;
+  }
+`
+
+//Buttons
 export const ButtonBox = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -71,6 +118,7 @@ export const ButtonBox = styled.div`
   justify-content: space-between;
   margin-right: 8px;
   height: 30px;
+  margin-top: 8px;
   margin-bottom: 10px;
   padding: 0 14px;
 `

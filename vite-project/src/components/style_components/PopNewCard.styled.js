@@ -53,3 +53,64 @@ export const Wrap = styled.div`
   align-items: flex-start;
   justify-content: space-between;
 `
+
+export const Form = styled.form`
+    max-width: 100%;
+    width: 100%;
+    display: block;
+    margin-right: 21px;
+`
+
+export const FormBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const Input = styled.input`
+  width: 100%;
+  max-width: 370px;
+  outline: none;
+  padding: 14px;
+  background: transparent;
+  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.14px;
+  margin-bottom: 20px;
+`
+
+export const Textarea = styled.textarea`
+    max-width: 370px;
+    width: 100%;
+  outline: none;
+  padding: 14px;
+  background: transparent;
+  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.14px;
+  margin-bottom: 20px;
+  height: 200px;
+`
+
+export const Button = styled.button`
+    width: 132px;
+  height: 30px;
+  background-color: #565EEF;
+  border-radius: 4px;
+  border: 0;
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #FFFFFF;
+  float: right;
+
+
+
+    @media (max-width: 500px){
+        width: 100%;
+    }
+`
