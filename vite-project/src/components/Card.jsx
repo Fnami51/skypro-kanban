@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
-import '../App.css'
+
 import { getStyle } from './data.js';
 import * as card from './style_components/Card.styled.js'
 
 function Card({ id, topic, title, date }) {
-
 
     return <card.Item>
     <card.Card>
@@ -36,7 +35,7 @@ function Card({ id, topic, title, date }) {
                         </clipPath>
                     </defs>
                 </card.DateSvg>
-                <card.DateText>{date}</card.DateText>
+                <card.DateText>{new Date(date).toLocaleDateString('ru-US')}</card.DateText>
             </card.DateBox>
         </card.Content>
     </card.Card>

@@ -75,11 +75,67 @@ margin-bottom: 14px;
   line-height: 1;
 `
 
+export const StatusThemeBlock = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+`
+export const StatusInput = styled.input`
+&:checked+label{
+  background: #94A6BE;
+  color: #FFFFFF;
+}
+`
+
+export const StatusTheme = styled.label`
+  border-radius: 24px;
+  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  padding: 11px 14px 10px;
+  margin-right: 7px;
+  margin-bottom: 7px;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.14px;
+  background: #FFFFFF;
+  color: #94A6BE;
+
+  &:checked+label{
+  background: #94A6BE;
+  color: #FFFFFF;
+  }
+
+  &:hover{
+  background: #94A6BE;
+  color: #FFFFFF;
+  }
+`
+
+export const StatusThemeConst = styled.div`
+  border-radius: 24px;
+  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  padding: 11px 14px 10px;
+  margin-right: 7px;
+  margin-bottom: 7px;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.14px;
+  background: #94A6BE;
+  color: #FFFFFF;
+`
+
 export const Form = styled.form`
   max-width: 370px;
   width: 100%;
   display: block;
   margin-bottom: 20px;
+`
+
+export const FormTitle = styled.label`
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
 `
 
 export const FormBlock = styled.div`
@@ -140,4 +196,29 @@ font-weight: 500;
 line-height: 10px;
 letter-spacing: -0.01em;
 text-align: center;
+`
+
+export const ButtonBG = styled(Button)`
+  border-radius: 4px;
+  background: #565EEF;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+
+  &:hover{
+    background-color: #33399b;
+  }
+`
+
+export const ButtonBOR = styled(Button)`
+  border-radius: 4px;
+  border: 0.7px solid var(--palette-navy-60, #565EEF);
+  outline: none;
+  background: transparent;
+  color: #565EEF;
+
+  &:hover{
+    background-color: #33399b;
+    color: #FFFFFF;
+  }
 `

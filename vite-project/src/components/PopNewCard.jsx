@@ -1,11 +1,9 @@
-import '../App.css'
 import Calendar from './Calendar.jsx';
 import { postCards } from './api.js';
 import useTasks from '../hooks/useTasks.js';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import useDate from '../hooks/useDate.js';
 import * as PNC from './style_components/PopNewCard.styled.js'
 import * as CC from './style_components/CommonComponents.styled.js'
 
@@ -13,11 +11,11 @@ import * as CC from './style_components/CommonComponents.styled.js'
 function PopNewCard() {
     let navigate = useNavigate();
     const {setTasks} = useTasks()
-    const {dateInContext} = useDate();
+    const [date, setNewDate] = useState(new Date());
 
 
     function onCardAdd() {
-        postCards(localStorage.getItem("token"), task.title, task.topic, task.status, task.description, task.date)
+        postCards(localStorage.getItem("token"), task.title, task.topic, task.status, task.description, date)
 		.then(data => { 
 			setTasks(data.tasks);
             navigate('/');
@@ -32,14 +30,14 @@ const [task, setTask] = useState({
     topic: "Research", 
     status: "Без статуса", 
     description: "", 
-    date: dateInContext})
+    })
 
     return <PNC.Background id="popNewCard">
     <PNC.Container>
         <PNC.Block>
             <PNC.Content>
                 <PNC.Title>Создание задачи</PNC.Title>
-                <Link to={'/'} className="pop-new-card__close">&#10006;</Link>
+                <PNC.Close ><Link to={"/"}>&#10006;</Link></PNC.Close>
                 <PNC.Wrap>
                     <PNC.Form id="formNewCard" action="#">
                         <PNC.FormBlock>
@@ -61,9 +59,8 @@ const [task, setTask] = useState({
                         <CC.Title>Даты</CC.Title>
                         <div style={{display: "block"}}>
                             
-                            <Calendar />
+                            <Calendar date={date} setNewDate={setNewDate}/>
                     
-                            <input type="hidden" id="datepick_value" value={dateInContext}/>
                         </div>
                     </CC.CalendarBox>
 
@@ -72,24 +69,24 @@ const [task, setTask] = useState({
                     <CC.Title>Категория</CC.Title>
                     <CC.ThemeBox>
                     
-                            <input type="radio" name="topic" id="input--web_design" value="Web Design" onChange={() => setTask({...task, topic : "Web Design"})} style={{display: "none"}}/>
+                            <CC.InputRadio type="radio" name="topic" id="input--web_design" value="Web Design" onChange={() => setTask({...task, topic : "Web Design"})} style={{display: "none"}}/>
                             <CC.Theme className="_orange" htmlFor="input--web_design">
                                 Web Design
                             </CC.Theme>
                     
-                            <input type="radio" name="topic" id="input--research" value="Research" onChange={() => setTask({...task, topic : "Research"})} style={{display: "none"}}/>
+                            <CC.InputRadio type="radio" name="topic" id="input--research" value="Research" onChange={() => setTask({...task, topic : "Research"})} style={{display: "none"}}/>
                             <CC.Theme className="_green" htmlFor="input--research">
                                 Research
                             </CC.Theme>
                     
-                            <input type="radio" name="topic" id="input--copywriting" value="Copywriting" onChange={() => setTask({...task, topic : "Copywriting"})} style={{display: "none"}}/>
+                            <CC.InputRadio type="radio" name="topic" id="input--copywriting" value="Copywriting" onChange={() => setTask({...task, topic : "Copywriting"})} style={{display: "none"}}/>
                             <CC.Theme className="_purple" htmlFor="input--copywriting">
                                 Copywriting
                             </CC.Theme>
                     
                     </CC.ThemeBox>
                 </CC.Background>
-                <PNC.Button onClick={onCardAdd} className="_hover01" id="btnCreate">Создать задачу</PNC.Button>
+                <PNC.Button onClick={onCardAdd} id="btnCreate">Создать задачу</PNC.Button>
             </PNC.Content>
         </PNC.Block>
     </PNC.Container>

@@ -13,22 +13,14 @@ export default function Calendar() {
 
 import { DayPicker } from "react-day-picker";
 import './style_components/calendar_style.css';
-import useDate from "../hooks/useDate";
 
-export default function Calendar() {
-  const {dateInContext, setDate} = useDate();
-
-  const handleSelect = (date) => {
-    console.log("Date from Calendar", date)
-    setDate(String(date));
-    console.log("Date in Context: ", dateInContext)
-  };
+export default function Calendar({date, setNewDate}) {
 
   return (
     <div>
-      <DayPicker mode="single" selected={dateInContext} onSelect={handleSelect} />
+      <DayPicker mode="single" selected={date} onSelect={setNewDate} />
       
-        <p className="down_date">Срок исполнения: {Date(dateInContext)}</p>
+        <p className="down_date">Срок исполнения: {date.toLocaleDateString('ru-US')}</p>
       
     </div>
   );

@@ -108,9 +108,22 @@ export const Button = styled.button`
   color: #FFFFFF;
   float: right;
 
-
+&:hover{
+  background-color: #33399b;
+}
 
     @media (max-width: 500px){
         width: 100%;
     }
+`
+
+export const Close = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #94A6BE;
+
+  &:hover {
+  color: #000000;
+}
 `

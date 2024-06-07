@@ -69,7 +69,7 @@ export function postCards(token, title, topic, status, text, date) {
       "title": title,
       "topic": topic,
       "status": status,
-      "descriptoin": text,
+      "description": text,
       "date": date,
     }),
   }).then((response) => {
@@ -80,7 +80,7 @@ export function postCards(token, title, topic, status, text, date) {
   });
 }
 
-export function putCards( {id, token, title, topic, status, text, date} ) {
+export function putCards( {id, token, title, topic, status, description, date} ) {
   cheakOnline()
   return fetch("https://wedev-api.sky.pro/api/kanban/" + id, {
     method: "PUT",
@@ -88,11 +88,11 @@ export function putCards( {id, token, title, topic, status, text, date} ) {
       Authorization: addBearer(token),
     },
     body: JSON.stringify({
-      "title": title,
-      "topic": topic,
-      "status": status,
-      "descriptoin": text,
-      "date": date,
+      title,
+      topic,
+      status,
+      description,
+      date,
     }),
   }).then((response) => {
     if (response.status === 401) {

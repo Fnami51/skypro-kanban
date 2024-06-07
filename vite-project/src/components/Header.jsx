@@ -1,4 +1,4 @@
-import '../App.css'
+
 import * as header from './style_components/Header.styled.js'
 import { useState } from 'react';
 import { Container } from '../App.styled.js';
@@ -13,22 +13,25 @@ function Header() {
     return <header.Background>
     <Container>
         <header.Header>
-            <div className="header__logo _show _light">
-                <a href="" target="_self"><img src="images/logo.png" alt="logo"/></a>
-            </div>
-            <div className="header__logo _dark">
-                <a href="" target="_self"><img src="images/logo_dark.png" alt="logo"/></a>
-            </div>
+            <Link to={"/"}><header.Logo src="images/logo.png" alt="logo"/></Link>
+            
             <header.Navigator>
-                <button className="header__btn-main-new _hover01" id="btnMainNew"><Link to={'/newcard'}>Создать новую задачу</Link></button>
-                <a onClick={openMenu} className="header__user _hover02">{localStorage.getItem("name")}</a>
+                <header.NewTaskButton id="btnMainNew"><Link to={'/newcard'} style={{color: '#FFF'}}>Создать новую задачу</Link></header.NewTaskButton>
+                <header.Menu onClick={openMenu} className="_hover02">
+                    {localStorage.getItem("name")}
+                    <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.08955 1.13726C0.840306 0.891094 0.437472 0.891094 0.188227 1.13726C-0.0627424 1.38514 -0.0627423 1.78832 0.188227 2.03619L2.87162 4.68647C3.35849 5.16734 4.14151 5.16734 4.62838 4.68647L7.31177 2.03619C7.56274 1.78832 7.56274 1.38514 7.31177 1.13726C7.06253 0.891095 6.65969 0.891094 6.41045 1.13726L3.75 3.76489L1.08955 1.13726Z" fill="#565EEF"/>
+                    </svg>
+                </header.Menu>
                 
-                <div style={isOpen ? {display: "block"} : {display: "none"}} className="header__pop-user-set pop-user-set" id="user-set-target">
-                    <p className="pop-user-set__name">{localStorage.getItem("name")}</p>
-                    <p className="pop-user-set__mail">{localStorage.getItem("email")}</p>
+
+                
+                <header.UserSet style={isOpen ? {display: "block"} : {display: "none"}} id="user-set-target">
+                    <header.Name>{localStorage.getItem("name")}</header.Name>
+                    <header.Mail>{localStorage.getItem("email")}</header.Mail>
                     
-                    <button type="button" className="_hover03"><a href="exit">Выйти</a></button>
-                </div>
+                    <header.ExitButton type="button"><Link to={'/exit'} style={{color: '#565EEF'}}>Выйти</Link></header.ExitButton>
+                </header.UserSet>
             </header.Navigator>					
         </header.Header>
     </Container>			

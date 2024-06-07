@@ -19,6 +19,12 @@ export const ThemeBox = styled.div`
   justify-content: flex-start;
 `
 
+export const InputRadio = styled.input`
+&:checked+label{
+  opacity: 1 !important;
+}
+`
+
 export const Theme = styled.label`
   display: inline-block;
   width: auto;
@@ -36,7 +42,7 @@ export const Theme = styled.label`
     opacity: 1 !important;
   }
 
-  &::after{
+  &:checked{
     opacity: 1 !important;
   }
 `;
