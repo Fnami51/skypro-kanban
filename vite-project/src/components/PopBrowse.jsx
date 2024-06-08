@@ -9,8 +9,6 @@ import * as PB from './style_components/PopBrowse.styled.js'
 import * as CC from './style_components/CommonComponents.styled.js'
 
 
-//Не забудь исправить стили в кнопках
-
 
 function PopBrowse() {
     let navigate = useNavigate();
@@ -21,16 +19,15 @@ function PopBrowse() {
     const {tasks, setTasks} = useTasks()
 
     const [isChange, setIsChange] = useState(false)
-    
+
     const card = tasks.find( card => card._id === cardId);
 
-useEffect(() => {
-    setNewDate(new Date(card.date))
-}, [card])
+    useEffect(() => {
+        setNewDate(new Date(card.date))
+    }, [card])
 
     function changeCard() {
         setIsChange((prevState) => !prevState);
-        // дописать функционал
     }
 
     const [task, setTask] = useState({

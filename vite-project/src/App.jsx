@@ -12,7 +12,7 @@ import NotFound from './pages/NotFoundPage/NotFound.jsx';
 
 
 function App() {
-  const isAuth = Boolean(localStorage.getItem("token"));
+  const isAuth = localStorage.getItem("token") ? true : false;
 
 // const [cards, setCards] = useState([]);
 
