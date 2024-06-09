@@ -8,11 +8,13 @@ import PopBrowse from './components/PopBrowse.jsx';
 import PopNewCard from './components/PopNewCard.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import NotFound from './pages/NotFoundPage/NotFound.jsx';
+import useAuth from './hooks/useAuth.js';
 
 
 
 function App() {
-  const isAuth = localStorage.getItem("token") ? true : false;
+  const {user} = useAuth();
+  const isAuth = user.token ? true : false;
 
 // const [cards, setCards] = useState([]);
 

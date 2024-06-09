@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import Calendar from './Calendar.jsx';
 import { getStyle } from './data.js';
 import useTasks from '../hooks/useTasks.js';
+import useAuth from '../hooks/useAuth.js';
 import { useEffect, useState } from 'react';
 import { deleteCards, putCards } from './api.js';
 import { useNavigate } from 'react-router-dom';
@@ -13,8 +14,9 @@ import * as CC from './style_components/CommonComponents.styled.js'
 function PopBrowse() {
     let navigate = useNavigate();
     const {cardId} = useParams();
+    const {user} = useAuth();
     const [date, setNewDate] = useState(new Date());
-    const token = localStorage.getItem("token")
+    const token = user.token
 
     const {tasks, setTasks} = useTasks()
 
