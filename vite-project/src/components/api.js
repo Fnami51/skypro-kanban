@@ -38,6 +38,9 @@ export function loginUser( login, password ) {
         "password": password
       }),
     }).then((response) => {
+      if (response.status === 400) {
+        throw new Error("Неверный логин или пароль");
+      }
       return response.json();
     });
   }
@@ -51,6 +54,9 @@ export function loginUser( login, password ) {
       Authorization: addBearer(token),
     },
   }).then((response) => {
+    if (response.status === 400) {
+      throw new Error("Задачи не найдены");
+    } 
     if (response.status === 401) {
       throw new Error("Вы не зарегестрированы");
     } 
@@ -73,6 +79,9 @@ export function postCards(token, title, topic, status, text, date) {
       "date": date,
     }),
   }).then((response) => {
+    if (response.status === 400) {
+      throw new Error("Задачи не найдены");
+    } 
     if (response.status === 401) {
       throw new Error("Вы не зарегестрированы");
     } 
@@ -95,6 +104,9 @@ export function putCards( {id, token, title, topic, status, description, date} )
       date,
     }),
   }).then((response) => {
+    if (response.status === 400) {
+      throw new Error("Задачи не найдены");
+    } 
     if (response.status === 401) {
       throw new Error("Вы не зарегестрированы");
     } 
@@ -110,6 +122,9 @@ export function deleteCards( id, token ) {
       Authorization: addBearer(token),
     },
   }).then((response) => {
+    if (response.status === 400) {
+      throw new Error("Задачи не найдены");
+    } 
     if (response.status === 401) {
       throw new Error("Вы не зарегестрированы");
     } 

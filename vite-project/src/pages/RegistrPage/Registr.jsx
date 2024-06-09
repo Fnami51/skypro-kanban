@@ -1,8 +1,11 @@
 import * as registr from '../style_pages/Registr.styled.js';
 import { Link, useNavigate } from 'react-router-dom'
 import { registerUser } from '../../components/api.js';
+import useAuth from '../../hooks/useAuth.js';
+
 function Registr() {
     let navigate = useNavigate();
+    const {setToken} = useAuth()
       
     function handleSubmit(event) {
         event.preventDefault();
@@ -11,14 +14,16 @@ function Registr() {
             const login = event.target.loginReg.value
             const password = event.target.passwordFirst.value
             registerUser(login, name, password ).then((data) => {
-                localStorage.setItem("name", data.user.name)
-                localStorage.setItem("email", data.user.login) 
-                localStorage.setItem("token", data.user.token)
+                setToken(data.user);
+                //localStorage.setItem("name", data.user.name)
+                //localStorage.setItem("email", data.user.login) 
+                //localStorage.setItem("token", data.user.token)
                 navigate('/');
             });
 
         } catch (error) {
-            console.log('Error', error)
+            console.log('Error Auth', error)
+            alert(error.message);
         }
             
     }

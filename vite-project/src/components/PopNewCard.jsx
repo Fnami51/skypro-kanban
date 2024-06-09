@@ -1,6 +1,7 @@
 import Calendar from './Calendar.jsx';
 import { postCards } from './api.js';
 import useTasks from '../hooks/useTasks.js';
+import useAuth from '../hooks/useAuth.js';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -10,18 +11,20 @@ import * as CC from './style_components/CommonComponents.styled.js'
 
 function PopNewCard() {
     let navigate = useNavigate();
+    const {user} = useAuth();
     const {setTasks} = useTasks()
     const [date, setNewDate] = useState(new Date());
 
 
     function onCardAdd() {
-        postCards(localStorage.getItem("token"), task.title, task.topic, task.status, task.description, date)
+        postCards(user.token, task.title, task.topic, task.status, task.description, date)
 		.then(data => { 
 			setTasks(data.tasks);
             navigate('/');
 		})
 		.catch(error => { 
-			console.log('Error', error); 
+			console.log('Error APi', error); 
+            alert(error.message);
 		});
     }
 

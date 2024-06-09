@@ -6,6 +6,7 @@ function Exit() {
       
     function goLoginPage(event) {
         event.preventDefault();
+        localStorage.clear()
         navigate('/login');
     }
 
