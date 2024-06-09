@@ -30,7 +30,7 @@ function Header() {
                 
                 <header.UserSet style={isOpen ? {display: "block"} : {display: "none"}} id="user-set-target">
                     <header.Name>{user.name}</header.Name>
-                    <header.Mail>{user.email}</header.Mail>
+                    <header.Mail>{user.login}</header.Mail>
                     
                     <header.ExitButton type="button"><Link to={'/exit'} style={{color: '#565EEF'}}>Выйти</Link></header.ExitButton>
                 </header.UserSet>
