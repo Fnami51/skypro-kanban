@@ -44,7 +44,8 @@ function PopBrowse() {
                 navigate('/');
             })
             .catch(error => { 
-                console.log('Error', error); 
+                console.log('Error APi', error);
+                alert(error.message); 
             });
         }
 
@@ -55,7 +56,8 @@ function PopBrowse() {
             navigate('/');
 		})
         .catch(error => { 
-			console.log('Error', error); 
+			console.log('Error APi', error); 
+            alert(error.message);
 		});
     }
 

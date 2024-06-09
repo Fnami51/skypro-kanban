@@ -21,7 +21,8 @@ function PopNewCard() {
             navigate('/');
 		})
 		.catch(error => { 
-			console.log('Error', error); 
+			console.log('Error APi', error); 
+            alert(error.message);
 		});
     }
 

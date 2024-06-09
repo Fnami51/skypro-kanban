@@ -23,7 +23,8 @@ function MainPage() {
     .then(data => { 
       setTasks(data.tasks)})
       .catch(error => { 
-        console.log('Error', error); 
+        console.log('Error APi', error); 
+        alert(error.message);
       }); }, []);
 
   return (

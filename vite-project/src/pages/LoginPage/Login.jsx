@@ -19,7 +19,8 @@ function Login() {
             
 
         } catch (error) {
-            console.log('Error', error)
+            console.log('Error Auth', error);
+            alert(error.message);
         }
             
     }
